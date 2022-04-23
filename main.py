@@ -18,12 +18,13 @@ player_image = pygame.image.load("spaceship.png")
 # set player coordinates
 player_x = 280
 player_y = 350
+player_x_change = 0
+player_y_change = 0
 
-# add player image and coordinates on screen
 
-
-def player():
-    screen.blit(player_image, (player_x, player_y))
+def player(x, y):
+    # add player image and coordinates on screen
+    screen.blit(player_image, (x, y))
 
 
 # game loop
@@ -33,10 +34,23 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+        # check if key is pressed and update player coordinates appropraitely
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                player_x_change += 0.1
+
+            if event.key == pygame.K_LEFT:
+                player_x_change -= 0.1
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                player_x_change = 0
+
     # set background colour
     screen.fill((0, 128, 128))
 
     # call player function after screen.fill
-    player()
+    player_x += player_x_change
+    player(player_x, player_y)
 
     pygame.display.update()
