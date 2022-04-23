@@ -51,6 +51,14 @@ while running:
 
     # call player function after screen.fill
     player_x += player_x_change
+
+    # set player boundaries
+    if player_x <= 0:
+        player_x = 0
+    elif player_x >= 565:
+        player_x = 565
+
+    # call player function and pass coordinates
     player(player_x, player_y)
 
     pygame.display.update()
