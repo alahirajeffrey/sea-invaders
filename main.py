@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 
 # initialize pygame
 pygame.init()
@@ -18,6 +19,9 @@ pygame.display.set_icon(icon)
 
 # load player image
 player_image = pygame.image.load("spaceship.png")
+
+# player score
+score = 0
 
 # set player coordinates
 player_x = 280
@@ -62,6 +66,16 @@ def fire_bullet(x, y):
     global bullet_state
     bullet_state = 'fire'
     screen.blit(bullet_image, (x+8, y+5))
+
+
+def isCollision(enemy_x, enemy_y, bullet_x, bullet_y):
+    "check for collision"
+    distance = math.sqrt((math.pow(enemy_x - bullet_x, 2)) +
+                         (math.pow(enemy_y - bullet_y, 2)))
+    if distance < 27:
+        return True
+    else:
+        return False
 
 
 # game loop
@@ -127,5 +141,13 @@ while running:
     if bullet_state is 'fire':
         fire_bullet(bullet_x, bullet_y)
         bullet_y -= bullet_y_change
+
+    collision = isCollision(enemy_x, enemy_y, bullet_x, bullet_y)
+    if collision:
+        bullet_y = 350
+        bullet_state = 'ready'
+        score += 5
+        enemy_x = random.randint(0, 280)
+        enemy_y = random.randint(50, 100)
 
     pygame.display.update()
