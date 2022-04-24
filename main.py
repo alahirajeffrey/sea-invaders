@@ -38,7 +38,7 @@ enemy_image = pygame.image.load("enemy.png")
 enemy_x = random.randint(0, 280)
 enemy_y = random.randint(50, 100)
 enemy_x_change = 0.5
-enemy_y_change = 20
+enemy_y_change = 10
 
 
 def enemy(x, y):
@@ -53,7 +53,7 @@ bullet_image = pygame.image.load("bullet.png")
 bullet_x = 0
 bullet_y = 350
 bullet_x_change = 0
-bullet_y_change = 5
+bullet_y_change = 0.5
 bullet_state = 'ready'
 
 
@@ -74,13 +74,15 @@ while running:
         # check if key is pressed and update player coordinates appropraitely
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                player_x_change += 1.0
+                player_x_change += 0.2
 
             if event.key == pygame.K_LEFT:
-                player_x_change -= 1.0
+                player_x_change -= 0.2
 
             if event.key == pygame.K_SPACE:
-                fire_bullet(player_x, bullet_y)
+                if bullet_state is 'ready':
+                    bullet_x = player_x
+                    fire_bullet(bullet_x, bullet_y)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -105,10 +107,10 @@ while running:
 
     # set enemy boundaries
     if enemy_x <= 0:
-        enemy_x_change = 1.0
+        enemy_x_change = 0.2
         enemy_y += enemy_y_change
     elif enemy_x >= 565:
-        enemy_x_change -= 1.0
+        enemy_x_change -= 0.2
         enemy_y += enemy_y_change
 
     # call player function and pass coordinates
@@ -118,8 +120,12 @@ while running:
     enemy(enemy_x, enemy_y)
 
     # bullet movement
+    if bullet_y <= 0:
+        bullet_y = 350
+        bullet_state = 'ready'
+
     if bullet_state is 'fire':
-        fire_bullet(player_x, bullet_y)
+        fire_bullet(bullet_x, bullet_y)
         bullet_y -= bullet_y_change
 
     pygame.display.update()
