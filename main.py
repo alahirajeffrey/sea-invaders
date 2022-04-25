@@ -28,7 +28,7 @@ player_image = pygame.image.load("spaceship.png")
 
 # player score
 score = 0
-font = pygame.font.Font('freesansbold.ttf', 32)
+score_font = pygame.font.Font('freesansbold.ttf', 32)
 
 text_x = 5
 text_y = 5
@@ -36,8 +36,19 @@ text_y = 5
 
 def show_score(x, y):
     "render score on top left corner of screen"
-    render_score = font.render("score : " + str(score), True, (255, 255, 255))
+    render_score = score_font.render(
+        "score : " + str(score), True, (255, 255, 255))
     screen.blit(render_score, (x, y))
+
+
+# game over font
+game_over_font = pygame.font.Font('freesansbold.ttf', 32)
+
+
+def game_over():
+    "render game over text on center of screen"
+    game_over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(game_over_text, (300, 200))
 
 
 # set player coordinates
@@ -141,6 +152,14 @@ while running:
 
     # update enemy x coordinate
     for i in range(num_of_enemies):
+
+        if enemy_y[i] >= 350:
+            for j in range(num_of_enemies):
+                enemy[j] = 800
+
+            game_over()
+            break
+
         enemy_x[i] += enemy_x_change[i]
 
         # set enemy boundaries
