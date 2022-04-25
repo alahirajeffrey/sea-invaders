@@ -22,6 +22,17 @@ player_image = pygame.image.load("spaceship.png")
 
 # player score
 score = 0
+font = pygame.font.Font('freesansbold.ttf', 32)
+
+text_x = 5
+text_y = 5
+
+
+def show_score(x, y):
+    "render score on top left corner of screen"
+    render_score = font.render("score : " + str(score), True, (255, 255, 255))
+    screen.blit(render_score, (x, y))
+
 
 # set player coordinates
 player_x = 280
@@ -155,4 +166,5 @@ while running:
         fire_bullet(bullet_x, bullet_y)
         bullet_y -= bullet_y_change
 
+    show_score(text_x, text_y)
     pygame.display.update()
