@@ -104,7 +104,7 @@ def isCollision(enemy_x, enemy_y, bullet_x, bullet_y):
     "check for collision"
     distance = math.sqrt(math.pow(enemy_x - bullet_x, 2) +
                          (math.pow(enemy_y - bullet_y, 2)))
-    if distance < 25:
+    if distance < 20:
         return True
     else:
         return False
@@ -153,7 +153,7 @@ while running:
     # update enemy x coordinate
     for i in range(num_of_enemies):
 
-        if enemy_y[i] >= 350:
+        if enemy_y[i] >= 330:
             for j in range(num_of_enemies):
                 enemy_y[j] = 2000
 
