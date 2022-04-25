@@ -1,4 +1,6 @@
 import pygame
+from pygame import mixer
+
 import random
 import math
 
@@ -11,6 +13,10 @@ screen = pygame.display.set_mode(size)
 
 # background
 background = pygame.image.load("background.jpg")
+
+# add background song
+mixer.music.load("background.wav")
+mixer.music.play(-1)
 
 # set game title and icons
 pygame.display.set_caption("Sea Invaders")
@@ -110,6 +116,8 @@ while running:
 
             if event.key == pygame.K_SPACE:
                 if bullet_state is 'ready':
+                    bullet_sound = mixer.Sound("bullet.wav")
+                    bullet_sound.play()
                     bullet_x = player_x
                     fire_bullet(bullet_x, bullet_y)
 
@@ -145,6 +153,8 @@ while running:
 
         collision = isCollision(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
         if collision:
+            collision_sound = mixer.Sound("collision.wav")
+            collision_sound.play()
             bullet_y = 350
             bullet_state = 'ready'
             score += 5
