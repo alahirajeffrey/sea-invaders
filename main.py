@@ -48,7 +48,7 @@ game_over_font = pygame.font.Font('freesansbold.ttf', 32)
 def game_over():
     "render game over text on center of screen"
     game_over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
-    screen.blit(game_over_text, (300, 200))
+    screen.blit(game_over_text, (200, 150))
 
 
 # set player coordinates
@@ -104,7 +104,7 @@ def isCollision(enemy_x, enemy_y, bullet_x, bullet_y):
     "check for collision"
     distance = math.sqrt(math.pow(enemy_x - bullet_x, 2) +
                          (math.pow(enemy_y - bullet_y, 2)))
-    if distance < 20:
+    if distance < 25:
         return True
     else:
         return False
@@ -155,7 +155,7 @@ while running:
 
         if enemy_y[i] >= 350:
             for j in range(num_of_enemies):
-                enemy[j] = 800
+                enemy_y[j] = 2000
 
             game_over()
             break
