@@ -19,7 +19,7 @@ mixer.music.load("assets/background.wav")
 mixer.music.play(-1)
 
 # set game title and icons
-pygame.display.set_caption("assets/Sea Invaders")
+pygame.display.set_caption("Sea Invaders")
 icon = pygame.image.load("assets/game_image.png")
 pygame.display.set_icon(icon)
 
