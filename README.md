@@ -9,3 +9,12 @@ Can you do it?
 Would you succed and go into the hall of fame?
 
 Play and find out
+
+## How to play
+- Ensure you have python installed
+- Run `pip install pygame` to install the pygame module
+- Install git and clone this repository by running `git clone https://github.com/alahirajeffrey/sea-invaders`
+- Open your termical and navigate to the cloned folder and run `python main.py`
+- Once the game starts running, use your left or right arrow key to move your fighter ship and space bar to fire your gunship
+
+![image](sea_invaders.JPG)
