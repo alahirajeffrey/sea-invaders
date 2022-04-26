@@ -12,19 +12,19 @@ size = width, height = 600, 400
 screen = pygame.display.set_mode(size)
 
 # background
-background = pygame.image.load("background.jpg")
+background = pygame.image.load("assets/background.jpg")
 
 # add background song
-mixer.music.load("background.wav")
+mixer.music.load("assets/background.wav")
 mixer.music.play(-1)
 
 # set game title and icons
-pygame.display.set_caption("Sea Invaders")
-icon = pygame.image.load("game_image.png")
+pygame.display.set_caption("assets/Sea Invaders")
+icon = pygame.image.load("assets/game_image.png")
 pygame.display.set_icon(icon)
 
 # load player image
-player_image = pygame.image.load("spaceship.png")
+player_image = pygame.image.load("assets/spaceship.png")
 
 # player score
 score = 0
@@ -69,7 +69,7 @@ num_of_enemies = 10
 
 # load enemy image
 for i in range(num_of_enemies):
-    enemy_image.append(pygame.image.load("enemy.png"))
+    enemy_image.append(pygame.image.load("assets/enemy.png"))
 
     # set enemy coordinates
     enemy_x.append(random.randint(0, 280))
@@ -84,7 +84,7 @@ def enemy(x, y, i):
 
 
 # load bullet image
-bullet_image = pygame.image.load("bullet.png")
+bullet_image = pygame.image.load("assets/bullet.png")
 
 # set bullet coordinates
 bullet_x = 0
@@ -127,7 +127,7 @@ while running:
 
             if event.key == pygame.K_SPACE:
                 if bullet_state is 'ready':
-                    bullet_sound = mixer.Sound("bullet.wav")
+                    bullet_sound = mixer.Sound("assets/bullet.wav")
                     bullet_sound.play()
                     bullet_x = player_x
                     fire_bullet(bullet_x, bullet_y)
@@ -172,7 +172,7 @@ while running:
 
         collision = isCollision(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
         if collision:
-            collision_sound = mixer.Sound("collision.wav")
+            collision_sound = mixer.Sound("assets/collision.wav")
             collision_sound.play()
             bullet_y = 350
             bullet_state = 'ready'
